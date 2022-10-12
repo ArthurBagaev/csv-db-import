@@ -1,14 +1,13 @@
-package ru.pitaza170.newsaggregator.util;
+package com.github.pitaza170.util;
 
+import com.github.pitaza170.common.Constants;
+import com.github.pitaza170.model.News;
 import org.apache.commons.csv.*;
-import ru.pitaza170.newsaggregator.model.News;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-
-import static ru.pitaza170.newsaggregator.common.Constants.FAILED_TO_PARSE;
 
 public class CSVHelper {
 
@@ -26,15 +25,15 @@ public class CSVHelper {
                         Long.parseLong(rec.get("id")),
                         rec.get("links"),
                         rec.get("title"),
-                        rec.get("role"),
-                        rec.get("text")
+                        rec.get("text"),
+                        rec.get("role")
                 );
                 newsList.add(news);
             }
 
             return newsList;
         } catch (IOException e) {
-            throw new RuntimeException(FAILED_TO_PARSE + e.getMessage());
+            throw new RuntimeException(Constants.FAILED_TO_PARSE + e.getMessage());
         }
     }
 

@@ -1,4 +1,4 @@
-package ru.pitaza170.newsaggregator.model;
+package com.github.pitaza170.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -54,12 +54,12 @@ public class News {
         this.title = title;
     }
 
-    public News(Long id, String links, String title, String role, String text) {
+    public News(Long id, String links, String title, String text, String role) {
         this.id = id;
         this.links = links;
         this.title = title;
-        this.role = role;
         this.text = text;
+        this.role = role;
     }
 
     public String getRole() {

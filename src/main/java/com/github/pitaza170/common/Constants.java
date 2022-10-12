@@ -1,4 +1,4 @@
-package ru.pitaza170.newsaggregator.common;
+package com.github.pitaza170.common;
 
 @SuppressWarnings("java:S1118")
 public class Constants {

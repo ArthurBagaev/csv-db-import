@@ -1,4 +1,4 @@
-package ru.pitaza170.newsaggregator.message;
+package com.github.pitaza170.message;
 
 public class ResponseMessage {
     private String message;

@@ -1,8 +1,8 @@
-package ru.pitaza170.newsaggregator.repository;
+package com.github.pitaza170.repository;
 
+import com.github.pitaza170.model.News;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ru.pitaza170.newsaggregator.model.News;
 
 import java.util.List;
 

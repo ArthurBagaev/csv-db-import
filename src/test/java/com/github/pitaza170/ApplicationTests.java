@@ -1,10 +1,10 @@
-package ru.pitaza170.newsaggregator;
+package com.github.pitaza170;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class NewsAggregatorApplicationTests {
+class ApplicationTests {
 
 	@Test
 	void contextLoads() {

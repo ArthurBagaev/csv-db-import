@@ -14,9 +14,9 @@
 </tr>
 <tr th:each="item : ${news}">
     <td><span th:text="${item.getTitle()}"> Title </span></td> </br>
-    <td><a href="redirect?url=@{item.getLinks()}"><span th:text="${item.getLinks()}"> Links </span></a></td> </br>
+    <td><a href="@{item.getLinks()}"><span th:text="${item.getLinks()}"> Links </span></a></td> </br>
 </tr>
-    </br>
+</br>
 </tbody>
 
 </body>

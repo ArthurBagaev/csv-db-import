@@ -1,13 +1,12 @@
-package ru.pitaza170.newsaggregator.service;
+package com.github.pitaza170.service;
 
+import com.github.pitaza170.model.News;
+import com.github.pitaza170.util.CSVHelper;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import ru.pitaza170.newsaggregator.model.News;
-import ru.pitaza170.newsaggregator.repository.NewsRepository;
-import ru.pitaza170.newsaggregator.util.CSVHelper;
+import com.github.pitaza170.repository.NewsRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.io.IOException;
