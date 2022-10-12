@@ -1,5 +1,4 @@
 FROM openjdk:17-jdk-slim
-COPY target/news-aggregator-*.jar news-aggregator.jar
+ADD target/csv-db-import-*.jar csv-db-import.jar
+ENTRYPOINT ["java", "-jar","csv-db-import.jar"]
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "news-aggregator.jar"]
-
