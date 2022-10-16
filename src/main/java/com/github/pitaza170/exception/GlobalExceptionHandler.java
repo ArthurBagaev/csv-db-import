@@ -42,9 +42,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.unprocessableEntity().body(errorResponse);
     }
 
+    public ResponseEntity<Object> handleEntityNotFoundException(javax.persistence.EntityNotFoundException ex,
+                                                                WebRequest request) {
+        log.error(ENTITY_NOT_FOUND, ex);
+        return buildErrorResponse(ex, ENTITY_NOT_FOUND, HttpStatus.NOT_FOUND, request);
+    }
+
     @ExceptionHandler(EntityNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException ex,
+    public ResponseEntity<Object> handleEntityNotFoundException(com.github.pitaza170.exception.EntityNotFoundException ex,
                                                                 WebRequest request) {
         log.error(ENTITY_NOT_FOUND, ex);
         return buildErrorResponse(ex, HttpStatus.NOT_FOUND, request);
@@ -69,7 +75,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     private boolean isTraceOn(WebRequest request) {
-        String [] value = request.getParameterValues(TRACE);
+        String[] value = request.getParameterValues(TRACE);
         return Objects.nonNull(value)
                 && value.length > 0
                 && value[0].contentEquals("true");

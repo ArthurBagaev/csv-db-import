@@ -1,5 +1,6 @@
 package com.github.pitaza170.service;
 
+import com.github.pitaza170.dto.response.NewsDto;
 import com.github.pitaza170.model.News;
 import com.github.pitaza170.util.CSVHelper;
 import lombok.SneakyThrows;
@@ -21,7 +22,7 @@ public class NewsService {
         this.newsRepository = newsRepository;
     }
 
-    public List<News> findAll() {
+    public List<NewsDto> findAll() {
         return newsRepository.findAll();
     }
 
@@ -39,7 +40,7 @@ public class NewsService {
         newsRepository.deleteAll();
     }
 
-    public List<News> findByRole(String role) {
+    public List<NewsDto> findByRole(String role) {
        return newsRepository.findByRole(role);
     }
 }
