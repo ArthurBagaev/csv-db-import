@@ -1,5 +1,7 @@
 package com.github.pitaza170.controller;
 
+import com.github.pitaza170.dto.response.ApiResponse;
+import com.github.pitaza170.dto.response.NewsDto;
 import com.github.pitaza170.model.News;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +9,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import com.github.pitaza170.message.ResponseMessage;
 import com.github.pitaza170.service.NewsService;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
+
+import static com.github.pitaza170.common.Constants.*;
 
 @Validated
 @RestController
@@ -19,41 +25,36 @@ import java.util.List;
 public class NewsController {
 
     private final NewsService newsService;
+    private final Date time;
 
-    @GetMapping("/news")
-    public ResponseEntity<List<News>> getAllNews() {
-        try {
-            List<News> news = newsService.findAll();
-
-            if (news.isEmpty()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
-            //return ResponseEntity.status(HttpStatus.OK).body(news);
-            return new ResponseEntity<>(news, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 
     @PostMapping("/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
-
+    public ResponseEntity<ApiResponse<NewsDto>> uploadFile(@RequestParam("file") MultipartFile file) {
         newsService.create(file);
-        String message = "Uploaded the file successfully: " + file.getOriginalFilename();
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+        return ResponseEntity
+                .ok(new ApiResponse<>(time, SUCCESSFULLY_UPLOADED));
+    }
+
+    @GetMapping("/news")
+    public ResponseEntity<ApiResponse<List<NewsDto>>> getAllNews() {
+        final List<NewsDto> news = newsService.findAll();
+        return ResponseEntity
+                .ok(new ApiResponse<>(time, SUCCESS, news));
     }
 
     @GetMapping("/news/{role}")
-    public ResponseEntity<List<News>> findByRole(@PathVariable String role) {
-        List<News> news = newsService.findByRole(role);
-        return new ResponseEntity<>(news, HttpStatus.OK);
+    public ResponseEntity<ApiResponse<List<NewsDto>>> findByRole(@PathVariable String role) {
+        final List<NewsDto> newsByRole = newsService.findByRole(role);
+        return ResponseEntity
+                .ok(new ApiResponse<>(time, SUCCESS, newsByRole));
     }
 
     @DeleteMapping("/news")
-    public ResponseEntity<ResponseMessage> deleteAll() {
+    public ResponseEntity<ApiResponse<NewsDto>> deleteAll() {
         newsService.deleteAll();
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("succesfully deleted"));
+        return ResponseEntity
+                .ok(new ApiResponse<>(time, SUCCESSFULLY_DELETED));
     }
-
 
 
 }
