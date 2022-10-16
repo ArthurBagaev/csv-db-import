@@ -1,25 +1,24 @@
 package com.github.pitaza170.controller;
 
 import com.github.pitaza170.model.News;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import com.github.pitaza170.message.ResponseMessage;
 import com.github.pitaza170.service.NewsService;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
+@Validated
 @RestController
 @RequestMapping("/api/v1/feed")
+@RequiredArgsConstructor
 public class NewsController {
 
     private final NewsService newsService;
-
-    @Autowired
-    public NewsController(NewsService newsService) {
-        this.newsService = newsService;
-    }
 
     @GetMapping("/news")
     public ResponseEntity<List<News>> getAllNews() {

@@ -25,6 +25,7 @@ public class News {
     private String role;
 
     @Column(name="text")
+    @Lob
     private String text;
 
     public News() {
