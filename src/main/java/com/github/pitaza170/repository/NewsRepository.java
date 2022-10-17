@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface NewsRepository<T> extends JpaRepository<T, Long> {
-    List<T> findByRole(String role);
+public interface NewsRepository extends JpaRepository<News, Long> {
+    List<News> findByRole(String role);
 }
 

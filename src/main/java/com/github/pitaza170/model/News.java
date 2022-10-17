@@ -31,6 +31,8 @@ public class News {
     public News() {
     }
 
+
+
     public Long getId() {
         return id;
     }
