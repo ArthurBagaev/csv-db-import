@@ -17,13 +17,22 @@ import java.util.List;
 public class NewsService {
 
     private final NewsRepository newsRepository;
+
     @Autowired
     public NewsService(NewsRepository newsRepository) {
         this.newsRepository = newsRepository;
     }
 
     public List<NewsDto> findAll() {
-        return newsRepository.findAll();
+        return newsRepository.findAll().stream()
+                .map(NewsDto::new)
+                .toList();
+    }
+
+    public List<NewsDto> findByRole(String role) {
+        return newsRepository.findByRole(role).stream()
+                .map(NewsDto::new)
+                .toList();
     }
 
     @SneakyThrows
@@ -38,9 +47,5 @@ public class NewsService {
 
     public void deleteAll() {
         newsRepository.deleteAll();
-    }
-
-    public List<NewsDto> findByRole(String role) {
-       return newsRepository.findByRole(role);
     }
 }
