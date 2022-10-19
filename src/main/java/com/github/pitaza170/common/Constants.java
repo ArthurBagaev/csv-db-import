@@ -9,4 +9,5 @@ public class Constants {
     public static final String SUCCESS = "Success";
     public static final String SUCCESSFULLY_DELETED = "Successfully deleted";
     public static final String SUCCESSFULLY_UPLOADED = "Uploaded the file successfully:";
+    public static final String FAILED_DATA = "FAIL TO STORE CSV DATA";
 }

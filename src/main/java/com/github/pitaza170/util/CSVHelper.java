@@ -1,6 +1,7 @@
 package com.github.pitaza170.util;
 
 import com.github.pitaza170.common.Constants;
+import com.github.pitaza170.dto.request.NewsRequest;
 import com.github.pitaza170.model.News;
 import org.apache.commons.csv.*;
 
@@ -11,17 +12,17 @@ import java.util.List;
 
 public class CSVHelper {
 
-    public static List<News> csvToNews(InputStream is) {
+    public static List<NewsRequest> csvToNews(InputStream is) {
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
 
              CSVParser csvParser = new CSVParser(fileReader,
                      CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim().withHeader());) {
 
-            List<News> newsList = new ArrayList<>();
+            List<NewsRequest> newsList = new ArrayList<>();
             Iterable<CSVRecord> csvRecords = csvParser.getRecords();
 
             for (CSVRecord rec : csvRecords) {
-                News news = new News(
+                NewsRequest news = new NewsRequest(
                         Long.parseLong(rec.get("id")),
                         rec.get("links"),
                         rec.get("title"),

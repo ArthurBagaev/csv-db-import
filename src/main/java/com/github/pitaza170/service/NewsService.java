@@ -1,5 +1,6 @@
 package com.github.pitaza170.service;
 
+import com.github.pitaza170.dto.mapper.NewsRequestMapper;
 import com.github.pitaza170.dto.response.NewsDto;
 import com.github.pitaza170.model.News;
 import com.github.pitaza170.util.CSVHelper;
@@ -12,6 +13,8 @@ import com.github.pitaza170.repository.NewsRepository;
 import javax.persistence.EntityNotFoundException;
 import java.io.IOException;
 import java.util.List;
+
+import static com.github.pitaza170.common.Constants.FAILED_DATA;
 
 @Service
 public class NewsService {
@@ -37,12 +40,14 @@ public class NewsService {
 
     @SneakyThrows
     public void create(MultipartFile file) throws EntityNotFoundException {
-        try {
-            List<News> tutorials = CSVHelper.csvToNews(file.getInputStream());
-            newsRepository.saveAll(tutorials);
-        } catch (IOException e) {
-            throw new RuntimeException("fail to store csv data: " + e.getMessage());
+        final List<News> news = CSVHelper.csvToNews(file.getInputStream()).stream()
+                .map(NewsRequestMapper::mapToEntity)
+                .toList();
+
+        if (news.isEmpty()) {
+            throw new EntityNotFoundException(FAILED_DATA);
         }
+        newsRepository.saveAll(news);
     }
 
     public void deleteAll() {
