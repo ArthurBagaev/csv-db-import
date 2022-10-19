@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.github.pitaza170</groupId>
 	<artifactId>csv-db-import</artifactId>
-	<version>0.2.0-SNAPSHOT</version>
+	<version>0.3.0-SNAPSHOT</version>
 	<name>csv-db-import</name>
 	<description>Import data using Apache Commons CSV</description>
 	<properties>
