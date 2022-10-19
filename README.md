@@ -1,4 +1,4 @@
-# Spring Boot application for importing a CSV file into PostgreSQL using
+# Spring Boot application for importing a CSV file into PostgreSQL
 Import csv file into PostgreSQL by using Apache Commons CSV
 
 ## Description
