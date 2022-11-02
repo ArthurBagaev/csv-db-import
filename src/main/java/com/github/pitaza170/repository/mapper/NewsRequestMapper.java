@@ -1,4 +1,4 @@
-package com.github.pitaza170.dto.mapper;
+package com.github.pitaza170.repository.mapper;
 
 import com.github.pitaza170.dto.request.NewsRequest;
 import com.github.pitaza170.model.News;
